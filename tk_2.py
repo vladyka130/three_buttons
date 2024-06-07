@@ -19,7 +19,7 @@ def f2():
 def f3():
     text2.configure(text="cliced_3")
 def reset():
-    text2.configure(text="ANY_TEXT")
+    text2['text'] = entry.get()
 
 first_btn = Button(text="1", width=30, command=f1)
 first_btn.place(x=139, y=30)
@@ -32,6 +32,9 @@ thred_btn.place(x=139, y=100)
 
 reset = Button(text="RESET", width=30, command=reset)
 reset.place(x=139, y=165)
+
+entry = Entry(width=35)
+entry.place(x=140, y=195)
 
 text2.place(x=200,y=130)
 
