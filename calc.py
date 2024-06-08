@@ -29,7 +29,7 @@ def tabl():
         i.configure(text=insert_text)
         res = x * y                                          # РЕЗУЛЬТАТ
         ress.append(res)                                     # додаємо кожен результат в список
-    otvet.configure(text=ress)                               # втвід результатів у Label
+    #otvet.configure(text=ress)                               # втвід результатів у Label
     proverka.configure(state=NORMAL)
     text_virni.configure(text='')
     text_nevirni.configure(text='')
@@ -51,13 +51,13 @@ def proverka():
         else:
             enters[i].configure(background='#F78181')
     if count == 20:
-        print("відмінно")
+        text_ocinka_count.configure(text='Відмінно!')
     elif count < 20 and count > 17:
-        print("добре")
+        text_ocinka_count.configure(text='Добре!')
     elif count < 18 and count > 15:
-        print("задовільно")
+        text_ocinka_count.configure(text='Задовільно!')
     elif count < 14:
-        print("незадовільно")
+        text_ocinka_count.configure(text='НЕзадовільно!')
     print("вірних відповідей:", count)
     proverka.configure(state=DISABLED)
     text_virni.configure(text=count, fg='green')
@@ -80,6 +80,8 @@ text_nevirni = Label(bg="#2F4F4F", font=('Comic Sans MS', 14))
 text_nevirni.place(x=660, y=69)
 text_ocinka = Label(text="ОЦІНКА: ", font=('Comic Sans MS', 14), bg="#2F4F4F")
 text_ocinka.place(x=389, y=115)
+text_ocinka_count = Label(font=('Comic Sans MS', 14), bg="#2F4F4F")
+text_ocinka_count.place(x=510, y=115)
 
 l = []
 ress = []
