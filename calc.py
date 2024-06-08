@@ -14,7 +14,14 @@ canva = Canvas(width=687, height=389, bg='#2F4F4F',)
 canva.place(x=5, y=3)
 canva.create_line(373, 7, 373, 386, width=1)
 
+
+
 def tabl():
+    for i in range(20):
+        enters[i].configure(background='white')
+    ress.clear()
+    for i in range(20):
+        enters[i].delete(0, END)
     for i in l:
         x, y = random.randint(2, 9), random.randint(2, 9)
         insert_text = f'{x} * {y}'
@@ -22,17 +29,54 @@ def tabl():
         res = x * y                                          # РЕЗУЛЬТАТ
         ress.append(res)                                     # додаємо кожен результат в список
     otvet.configure(text=ress)                               # втвід результатів у Label
+    proverka.configure(state=NORMAL)
 
+def proverka():
+    answer = []
+    count = 0
+    for i in range(20):
+        if enters[i].get() != '' and enters[i].get().isdigit():
+            answer.append(int(enters[i].get()))
+        else:
+            enters[i].delete(0, END)
+            enters[i].insert(0, '0')
+            answer.append("0")
+    for i in range(20):
+        if answer[i] == int(enters[i].get()):
+            count +=1
+            enters[i].configure(background='#9FF781')
+        else:
+            enters[i].configure(background='#F78181')
+    if count == 20:
+        print("відмінно")
+    elif count < 20 and count > 17:
+        print("добре")
+    elif count < 18 and count > 15:
+        print("задовільно")
+    elif count < 14:
+        print("незадовільно")
+    print("вірних відповідей:", count)
+    proverka.configure(state=DISABLED)
 
 start = Button(text='НАДРУКУВАТИ ТАБЛИЧКУ МНОЖЕННЯ', bg="#0B615E", width=49, command=tabl)
 start.place(x=15, y=10)
-proverka = Button(text='ПЕРЕВІРТИ РЕЗУЛЬТАТИ', bg="#0B615E", width=39)
+proverka = Button(text='ПЕРЕВІРТИ РЕЗУЛЬТАТИ', bg="#0B615E", width=41, command=proverka)
 proverka.place(x=390, y=10)
+proverka.configure(state=DISABLED)
 
 text_priklad = Label(text='=', bg="#2F4F4F", font=14)
+text_resultat_virni = Label(text=f'ВІРНІ ВІДПОВІДІ: ', bg="#2F4F4F", font=('Comic Sans MS', 14))
+text_resultat_virni.place(x=389, y=46)
+text_resultat_nevirni = Label(text=f'НЕВІРНІ ВІДПОВІДІ: ', bg="#2F4F4F", font=('Comic Sans MS', 14))
+text_resultat_nevirni.place(x=389, y=70)
+text_virni = Label( bg="#2F4F4F", font=('Comic Sans MS', 14))
+text_virni.place(x=660, y=46)
+text_nevirni = Label( bg="#2F4F4F", font=('Comic Sans MS', 14))
+text_nevirni.place(x=660, y=69)
 
 l = []
 ress = []
+answer = []
 otvet = Label(bg='#2F4F4F', font=('Comic Sans MS', 9))
 otvet.place(x=15, y=300)
 
@@ -175,5 +219,10 @@ l20.place(x=210, y=275)
 text_priklad = Label(text='=', bg="#2F4F4F", font=14).place(x=315, y=270)
 enter20 = Entry(width=4, )
 enter20.place(x=335, y=275)
+
+enters = [enter1, enter2, enter3, enter4, enter5,
+          enter6, enter7, enter8, enter9, enter10,
+          enter11, enter12, enter13, enter14, enter15,
+          enter16, enter17, enter18, enter19, enter20]
 
 w.mainloop()
