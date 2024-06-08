@@ -13,6 +13,7 @@ w.resizable(height=False, width=False)
 canva = Canvas(width=687, height=389, bg='#2F4F4F',)
 canva.place(x=5, y=3)
 canva.create_line(373, 7, 373, 386, width=1)
+canva.create_line(388, 105, 678, 105, width=1 )
 
 
 
@@ -30,6 +31,8 @@ def tabl():
         ress.append(res)                                     # додаємо кожен результат в список
     otvet.configure(text=ress)                               # втвід результатів у Label
     proverka.configure(state=NORMAL)
+    text_virni.configure(text='')
+    text_nevirni.configure(text='')
 
 def proverka():
     answer = []
@@ -57,6 +60,8 @@ def proverka():
         print("незадовільно")
     print("вірних відповідей:", count)
     proverka.configure(state=DISABLED)
+    text_virni.configure(text=count, fg='green')
+    text_nevirni.configure(text=20 - count, fg='red')
 
 start = Button(text='НАДРУКУВАТИ ТАБЛИЧКУ МНОЖЕННЯ', bg="#0B615E", width=49, command=tabl)
 start.place(x=15, y=10)
@@ -71,8 +76,10 @@ text_resultat_nevirni = Label(text=f'НЕВІРНІ ВІДПОВІДІ: ', bg="#
 text_resultat_nevirni.place(x=389, y=70)
 text_virni = Label( bg="#2F4F4F", font=('Comic Sans MS', 14))
 text_virni.place(x=660, y=46)
-text_nevirni = Label( bg="#2F4F4F", font=('Comic Sans MS', 14))
+text_nevirni = Label(bg="#2F4F4F", font=('Comic Sans MS', 14))
 text_nevirni.place(x=660, y=69)
+text_ocinka = Label(text="ОЦІНКА: ", font=('Comic Sans MS', 14), bg="#2F4F4F")
+text_ocinka.place(x=389, y=115)
 
 l = []
 ress = []
