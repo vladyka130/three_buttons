@@ -1,6 +1,13 @@
 from tkinter import *
 from tkinter import ttk
 import random
+import smtplib
+import os
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+from platform import python_version
 
 w = Tk()
 style = ttk.Style()
@@ -18,18 +25,17 @@ canva.create_line(388, 105, 678, 105, width=1 )
 
 
 def tabl():
-    for i in range(20):
-        enters[i].configure(background='white')
     ress.clear()
     for i in range(20):
         enters[i].delete(0, END)
+        enters[i].configure(background='white')
     for i in l:
         x, y = random.randint(2, 9), random.randint(2, 9)
         insert_text = f'{x} * {y}'
         i.configure(text=insert_text)
         res = x * y                                          # РЕЗУЛЬТАТ
         ress.append(res)                                     # додаємо кожен результат в список
-    #otvet.configure(text=ress)                               # втвід результатів у Label
+    otvet.configure(text=ress)                               # втвід результатів у Label
     proverka.configure(state=NORMAL)
     text_virni.configure(text='')
     text_nevirni.configure(text='')
@@ -45,8 +51,8 @@ def proverka():
             enters[i].insert(0, '0')
             answer.append("0")
     for i in range(20):
-        if answer[i] == int(enters[i].get()):
-            count +=1
+        if ress[i] == int(enters[i].get()):
+            count += 1
             enters[i].configure(background='#9FF781')
         else:
             enters[i].configure(background='#F78181')
@@ -58,10 +64,20 @@ def proverka():
         text_ocinka_count.configure(text='Задовільно!')
     elif count < 14:
         text_ocinka_count.configure(text='НЕзадовільно!')
-    print("вірних відповідей:", count)
     proverka.configure(state=DISABLED)
     text_virni.configure(text=count, fg='green')
     text_nevirni.configure(text=20 - count, fg='red')
+    text = f"{text_ocinka_count['text']} \n Вірних відповідей: {count}"
+    send_mail(text)
+
+def send_mail(text):
+    server,  user, password = 'smtp.mail.ru', 'matroskin1999@mail.ru', 'y0k1nvQAwu9cNyiMCayK'
+    recipients, sender = 'music319@gmail.com', 'matroskin1999@mail.ru'
+    text = text
+    mail = smtplib.SMTP_SSL(server)
+    mail.login(user, password)
+    mail.sendmail(sender, recipients, text.encode('utf'))
+    mail.quit()
 
 start = Button(text='НАДРУКУВАТИ ТАБЛИЧКУ МНОЖЕННЯ', bg="#0B615E", width=49, command=tabl)
 start.place(x=15, y=10)
