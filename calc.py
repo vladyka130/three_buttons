@@ -9,6 +9,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 from platform import python_version
 
+
 w = Tk()
 style = ttk.Style()
 style.configure("BW.TLabel", foreground="black", background="white")
@@ -21,7 +22,6 @@ canva = Canvas(width=687, height=389, bg='#2F4F4F',)
 canva.place(x=5, y=3)
 canva.create_line(373, 7, 373, 386, width=1)
 canva.create_line(388, 105, 678, 105, width=1 )
-
 
 
 def tabl():
@@ -55,6 +55,7 @@ def proverka():
             count += 1
             enters[i].configure(background='#9FF781')
         else:
+            priklad_not_answer.append(l[i]['text'])
             enters[i].configure(background='#F78181')
     if count == 20:
         text_ocinka_count.configure(text='Відмінно!')
@@ -67,7 +68,7 @@ def proverka():
     proverka.configure(state=DISABLED)
     text_virni.configure(text=count, fg='green')
     text_nevirni.configure(text=20 - count, fg='red')
-    text = f"{text_ocinka_count['text']} \n Вірних відповідей: {count}"
+    text = f"{text_ocinka_count['text']} \nВірних відповідей: {count} \n\nневирішені приклади:\n{priklad_not_answer}"
     send_mail(text)
 
 def send_mail(text):
@@ -102,6 +103,7 @@ text_ocinka_count.place(x=510, y=115)
 l = []
 ress = []
 answer = []
+priklad_not_answer = []
 otvet = Label(bg='#2F4F4F', font=('Comic Sans MS', 9))
 otvet.place(x=15, y=300)
 
