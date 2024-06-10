@@ -1,11 +1,6 @@
 import smtplib
 import os
 from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
-from platform import python_version
-
 
 server = 'smtp.mail.ru'
 user = 'matroskin1999@mail.ru'
@@ -15,10 +10,6 @@ recipients = ['music319@gmail.com']
 sender = 'matroskin1999@mail.ru'
 subject = 'табличка множення Арсен'
 text = 'text'
-
-# filepath = "fish.png"
-# basename = os.path.basename(filepath)
-# filesize = os.path.getsize(filepath)
 
 msg = MIMEMultipart('alternative')
 msg['Subject'] = subject

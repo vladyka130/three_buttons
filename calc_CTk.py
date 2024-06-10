@@ -2,12 +2,7 @@ from tkinter import *
 import random
 import smtplib
 import customtkinter
-import os
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
-from platform import python_version
+
 
 
 w = customtkinter.CTk()

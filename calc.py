@@ -7,11 +7,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-from platform import python_version
-
 
 w = Tk()
-w.title('Табличка множення для Арсена')
+w.title('Табличка множення для Арсена v.1.0')
 customtkinter.set_appearance_mode('dark')
 customtkinter.set_default_color_theme("blue")
 
@@ -23,13 +21,18 @@ canva = Canvas(width=687, height=439, bg='#2F4F4F')
 canva.place(x=5, y=3)
 canva.create_line(373, 7, 373, 435, width=1)
 canva.create_line(388, 105, 678, 105, width=1)
-canva.create_line(183, 47, 183, 294, width=1)
+canva.create_line(183, 47, 183, 299, width=1)
+canva.create_rectangle(5, 40, 683, 304)
+canva.create_rectangle(5, 304, 683, 436)
 
 def tabl():
     ress.clear()
     for i in range(20):
         enters[i].delete(0, END)
         enters[i].configure(background='#A9F5D0')
+    for i in range(5):
+        o[i].delete(0, END)
+        o[i].configure(background='#A9F5D0')
     for i in l:
         x, y = random.randint(2, 9), random.randint(2, 9)
         insert_text = f'{x} * {y}'
@@ -41,6 +44,7 @@ def tabl():
     text_virni.configure(text='')
     text_nevirni.configure(text='')
     for i in range(5):
+        o[i].configure(background='#A9F5D0')
         while True:
             a = random.randint(50, 100)
             b = random.randint(50, 100)
@@ -49,13 +53,10 @@ def tabl():
             if b > a:
                 break
         insert_text_2 = f'{c} * {d} + ({b}-{a})'
+        resss = c * d + (b - a)
+        ress_2.append(resss)
         p[i].configure(text=insert_text_2)
 
-    res_2 = c*d+(b-a)
-    print(res_2)
-
-p = []
-res_2 = []
 
 def proverka():
     answer = []
@@ -85,8 +86,35 @@ def proverka():
     proverka.configure(state=DISABLED)
     text_virni.configure(text=count, fg='green')
     text_nevirni.configure(text=20 - count, fg='red')
-    text = f"{text_ocinka_count['text']} \nВірних відповідей: {count} \n\nневирішені приклади:\n{priklad_not_answer}"
-    send_mail(text)
+
+    count_2 = 0
+    for i in range(5):
+        if o[i].get() != '' and o[i].get().isdigit():
+            answer_2.append(int(o[i].get()))
+        else:
+            o[i].delete(0, END)
+            o[i].insert(0, '0')
+            answer_2.append("0")
+    for i in range(5):
+        if ress_2[i] == int(o[i].get()):
+            count_2 += 1                                  # вірна відповідь
+            o[i].configure(background='#9FF781')          # робимо зелений
+        else:
+            priklad_not_answer_2.append(p[i]['text'])     # приклад  який не вирішено
+            o[i].configure(background='#F78181')          # робимо червоне
+    if count_2 == 5:
+        text_ocinka_count_2.configure(text='Відмінно!')
+    elif count_2 == 4:
+        text_ocinka_count_2.configure(text='Добре!')
+    elif count_2 == 3:
+        text_ocinka_count_2.configure(text='Задовільно!')
+    elif count_2 <= 2:
+        text_ocinka_count_2.configure(text='НЕзадовільно!')
+    text = f"{text_ocinka_count['text']} \nВірних відповідей: {count} \n\nневирішені приклади:\n{priklad_not_answer}\n\nПриклади: {text_ocinka_count_2['text']}"
+    try:
+        send_mail(text)
+    except Exception:
+        print("Internet connection error!")
 
 def send_mail(text):
     server,  user, password = 'smtp.mail.ru', 'matroskin1999@mail.ru', 'y0k1nvQAwu9cNyiMCayK'
@@ -115,7 +143,7 @@ text_nevirni.place(x=660, y=69)
 text_ocinka = Label(text="ОЦІНКА: ", font=('Comic Sans MS', 14), bg="#2F4F4F")
 text_ocinka.place(x=389, y=115)
 text_ocinka_count = Label(font=('Comic Sans MS', 14), bg="#2F4F4F")
-text_ocinka_count.place(x=510, y=115)
+text_ocinka_count.place(x=389, y=140)
 
 l = []
 ress = []
@@ -123,6 +151,11 @@ answer = []
 priklad_not_answer = []
 otvet = Label(bg='#2F4F4F', font=('Comic Sans MS', 9))
 otvet.place(x=15, y=305)
+
+p = []
+ress_2 = []
+answer_2 = []
+priklad_not_answer_2 = []
 
 l1 = Label(width=15, text='', background='#A9F5D0', relief='ridge')
 l.append(l1)
@@ -301,4 +334,9 @@ enters = [enter1, enter2, enter3, enter4, enter5,
 
 p = [p1, p2, p3, p4, p5]
 o = [o1, o2, o3, o4, o5]
+text_ocinka_2 = Label(text="ОЦІНКА ЗА ПРИКЛАДИ: ", font=('Comic Sans MS', 14), bg='#2F4F4F')
+text_ocinka_2.place(x=389, y=310)
+text_ocinka_count_2 = Label(font=('Comic Sans MS', 14), bg='#2F4F4F')
+text_ocinka_count_2.place(x=389, y=335)
+
 w.mainloop()
