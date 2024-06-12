@@ -46,14 +46,17 @@ def tabl():
 def proverka():
     count = 0
     answer = []
+    print(results)
     for i in range(15):
         if answer_Entry[i].get() != '' and answer_Entry[i].get().isdigit():
             answer.append(int(answer_Entry[i].get()))
+            #if answer_Entry[i].get() == results[i]:
+                #count +=1
         else:
             answer_Entry[i].delete(0, END)
             answer_Entry[i].insert(0, '0')
             answer.append("0")
-
+    print(count)
 
 start = Button(text='ПОКАЗАТИ ПРИКЛАДИ', bg="#0B615E", width=49, command=tabl)
 start.place(x=15, y=10)
