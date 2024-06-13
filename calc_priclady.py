@@ -1,3 +1,4 @@
+import tkinter.ttk as ttk
 from tkinter import *
 import random
 import smtplib
@@ -10,6 +11,8 @@ w["bg"] = '#2F4F4F'
 w.geometry("700x600")
 w.resizable(height=False, width=False)
 Frame(width=690, height=592, relief="ridge", bg='#2F4F4F', bd=1).place(x=5, y=4)
+pb = ttk.Progressbar(length=673)
+#pb.place(x=16, y=558)
 
 def priklad():
     results.clear()
@@ -60,8 +63,10 @@ def proverka():
                 #count +=1
         else:
             answer_Entry[i].delete(0, END)
-            answer_Entry[i].insert(0, '0')
-            answer.append("0")
+            answer_Entry[i].insert(0, '')
+            answer.append("")
+    proverka.configure(state=DISABLED)
+    print(answer)
 
 start = Button(text='ПОКАЗАТИ ПРИКЛАДИ', bg="#0B615E", width=49,  command=tabl)
 start.place(x=15, y=10)
@@ -80,6 +85,7 @@ for i in range(20):
     answer_Entry[i].place(x=x_priclady+250, y=y_priclady+1)
     y_ravno += 25
     y_priclady += 25
+    pb.step(10)
 
 
 
