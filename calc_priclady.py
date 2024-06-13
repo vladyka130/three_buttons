@@ -31,25 +31,28 @@ def priklad():
             diya_4 = [f'({zz} : {c}) + ({xxx} - {zz})', int((zz / c)) + (xxx - zz)]
             break
     diya.append(diya_4)
+    while True:
+        zz, b = random.randint(31, 99), random.randint(2, 10)
+        if zz % b == 0:
+            diya_5 = [f'{zz} : {b}', int(zz / b)]
+            break
+    diya.append(diya_5)
     return random.choice(diya)
 
 def tabl():
     proverka.configure(state=NORMAL)
-    results = []
-    global p
     for i in range(15):
         p = priklad()
+        result.append(p[1])
         priclady_Label[i].configure(text=p[0])
-        results.append(p[1])
         answer_Entry[i].delete(0, END)
-    print(results)
+    print(result)
 
-results = []
-
+result = []
 def proverka():
     count = 0
     answer = []
-    print(p[1])
+    print(result)
     for i in range(15):
         if answer_Entry[i].get() != '' and answer_Entry[i].get().isdigit():
             answer.append(int(answer_Entry[i].get()))
