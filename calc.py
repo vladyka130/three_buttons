@@ -61,6 +61,7 @@ def tabl():
 def proverka():
     answer = []
     count = 0
+    print(ress)
     for i in range(20):
         if enters[i].get() != '' and enters[i].get().isdigit():
             answer.append(int(enters[i].get()))

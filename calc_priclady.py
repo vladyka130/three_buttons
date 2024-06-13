@@ -36,6 +36,7 @@ def priklad():
 def tabl():
     proverka.configure(state=NORMAL)
     results = []
+    global p
     for i in range(15):
         p = priklad()
         priclady_Label[i].configure(text=p[0])
@@ -43,10 +44,12 @@ def tabl():
         answer_Entry[i].delete(0, END)
     print(results)
 
+results = []
+
 def proverka():
     count = 0
     answer = []
-    print(results)
+    print(p[1])
     for i in range(15):
         if answer_Entry[i].get() != '' and answer_Entry[i].get().isdigit():
             answer.append(int(answer_Entry[i].get()))
@@ -56,15 +59,13 @@ def proverka():
             answer_Entry[i].delete(0, END)
             answer_Entry[i].insert(0, '0')
             answer.append("0")
-    print(count)
 
-start = Button(text='ПОКАЗАТИ ПРИКЛАДИ', bg="#0B615E", width=49, command=tabl)
+start = Button(text='ПОКАЗАТИ ПРИКЛАДИ', bg="#0B615E", width=49,  command=tabl)
 start.place(x=15, y=10)
 proverka = Button(text='ПЕРЕВІРТИ РЕЗУЛЬТАТИ', bg="#0B615E", width=41, state=DISABLED, command=proverka)
 proverka.place(x=390, y=10)
 
-priclady_Label, symbol_ravno, answer_Entry, priklady = [], [], [], []
-results = []
+priclady_Label, symbol_ravno, answer_Entry, priklady, results = [], [], [], [], []
 
 x_priclady, y_priclady, x_ravno, y_ravno = 16, 50, 240, 45
 for i in range(15):
