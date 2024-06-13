@@ -7,9 +7,9 @@ from funcs import *
 w = Tk()
 w.title('Табличка множення для Арсена v.1.0')
 w["bg"] = '#2F4F4F'
-w.geometry("700x500")
+w.geometry("700x600")
 w.resizable(height=False, width=False)
-Frame(width=690, height=492, relief="ridge", bg='#2F4F4F', bd=1).place(x=5, y=4)
+Frame(width=690, height=592, relief="ridge", bg='#2F4F4F', bd=1).place(x=5, y=4)
 
 def priklad():
     results.clear()
@@ -41,7 +41,7 @@ def priklad():
 
 def tabl():
     proverka.configure(state=NORMAL)
-    for i in range(15):
+    for i in range(20):
         p = priklad()
         result.append(p[1])
         priclady_Label[i].configure(text=p[0])
@@ -53,7 +53,7 @@ def proverka():
     count = 0
     answer = []
     print(result)
-    for i in range(15):
+    for i in range(20):
         if answer_Entry[i].get() != '' and answer_Entry[i].get().isdigit():
             answer.append(int(answer_Entry[i].get()))
             #if answer_Entry[i].get() == results[i]:
@@ -71,7 +71,7 @@ proverka.place(x=390, y=10)
 priclady_Label, symbol_ravno, answer_Entry, priklady, results = [], [], [], [], []
 
 x_priclady, y_priclady, x_ravno, y_ravno = 16, 50, 240, 45
-for i in range(15):
+for i in range(20):
     priclady_Label.append(Label(width=30, text='', background='#A9F5D0', relief='ridge'))
     priclady_Label[i].place(x=x_priclady, y=y_priclady)
     symbol_ravno.append(Label(background='#2F4F4F', text='=', font=1))
