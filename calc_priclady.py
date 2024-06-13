@@ -43,6 +43,7 @@ def priklad():
     return random.choice(diya)
 
 def tabl():
+    result.clear()
     proverka.configure(state=NORMAL)
     for i in range(20):
         p = priklad()
@@ -55,18 +56,19 @@ result = []
 def proverka():
     count = 0
     answer = []
-    print(result)
+
     for i in range(20):
         if answer_Entry[i].get() != '' and answer_Entry[i].get().isdigit():
             answer.append(int(answer_Entry[i].get()))
-            #if answer_Entry[i].get() == results[i]:
-                #count +=1
         else:
             answer_Entry[i].delete(0, END)
             answer_Entry[i].insert(0, '')
             answer.append("")
-    proverka.configure(state=DISABLED)
+        if answer[i] == result[i]:
+            count +=1
     print(answer)
+    proverka.configure(state=DISABLED)
+    print(count)
 
 start = Button(text='ПОКАЗАТИ ПРИКЛАДИ', bg="#0B615E", width=49,  command=tabl)
 start.place(x=15, y=10)
