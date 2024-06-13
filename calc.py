@@ -137,10 +137,12 @@ text_resultat_virni = Label(text=f'ВІРНІ ВІДПОВІДІ: ', bg="#2F4F4F
 text_resultat_virni.place(x=389, y=46)
 text_resultat_nevirni = Label(text=f'НЕВІРНІ ВІДПОВІДІ: ', bg="#2F4F4F", font=('Comic Sans MS', 14))
 text_resultat_nevirni.place(x=389, y=70)
+
 text_virni = Label( bg="#2F4F4F", font=('Comic Sans MS', 14))
 text_virni.place(x=660, y=46)
 text_nevirni = Label(bg="#2F4F4F", font=('Comic Sans MS', 14))
 text_nevirni.place(x=660, y=69)
+
 text_ocinka = Label(text="ОЦІНКА: ", font=('Comic Sans MS', 14), bg="#2F4F4F")
 text_ocinka.place(x=389, y=115)
 text_ocinka_count = Label(font=('Comic Sans MS', 14), bg="#2F4F4F")
