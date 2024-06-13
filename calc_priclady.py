@@ -11,6 +11,7 @@ w["bg"] = '#2F4F4F'
 w.geometry("700x600")
 w.resizable(height=False, width=False)
 Frame(width=690, height=592, relief="ridge", bg='#2F4F4F', bd=1).place(x=5, y=4)
+Frame(width=297, height=119, relief="ridge", bg='#2F4F4F', bd=1).place(x=390, y=51)
 pb = ttk.Progressbar(length=673)
 #pb.place(x=16, y=558)
 
@@ -66,6 +67,8 @@ def proverka():
             answer.append("")
         if answer[i] == result[i]:
             count +=1
+    virnih.configure(text=count)
+    nevirnih.configure(text=20 - count)
     print(answer)
     proverka.configure(state=DISABLED)
     print(count)
@@ -74,6 +77,14 @@ start = Button(text='ПОКАЗАТИ ПРИКЛАДИ', bg="#0B615E", width=49,
 start.place(x=15, y=10)
 proverka = Button(text='ПЕРЕВІРТИ РЕЗУЛЬТАТИ', bg="#0B615E", width=41, state=DISABLED, command=proverka)
 proverka.place(x=390, y=10)
+
+text_resultat_virni = Label(text=f'ВІРНІ ВІДПОВІДІ: ', bg="#2F4F4F", font=('Comic Sans MS', 14)).place(x=392, y=52)
+text_resultat_nevirni = Label(text=f'НЕВІРНІ ВІДПОВІДІ: ', bg="#2F4F4F", font=('Comic Sans MS', 14)).place(x=392, y=78)
+
+virnih = Label( bg="#2F4F4F", font=('Comic Sans MS', 14))
+virnih.place(x=650, y=51)
+nevirnih = Label(bg="#2F4F4F", font=('Comic Sans MS', 14))
+nevirnih.place(x=650, y=74)
 
 priclady_Label, symbol_ravno, answer_Entry, priklady, results = [], [], [], [], []
 
